@@ -1,0 +1,26 @@
+server:
+  port: 8080
+
+application:
+  cors:
+    host: ${CORS_HOST}
+    methods:
+      - GET
+      - POST
+      - PUT
+      - PATCH
+      - DELETE
+
+spring:
+  application:
+    name: API
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+  datasource:
+    url: jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_NAME}
+    username: ${DB_USER}
+    password: ${DB_PASS}
+    driver-class-name: com.mysql.cj.jdbc.Driver
