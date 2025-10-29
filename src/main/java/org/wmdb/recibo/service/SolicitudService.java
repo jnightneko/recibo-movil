@@ -28,6 +28,21 @@ public class SolicitudService {
                 .map((value) -> SolicitudData.valueOf(value))
                 .toList();
     }
+
+    public SolicitudData getById(Long id) {
+        Solicitud model = repository.findById(id).orElseThrow();
+        return SolicitudData.valueOf(model);
+    }
+    
+    public SolicitudData getByUsuario(UsuarioData data) {
+        Long id = data.id();
+        Usuario usuario = id == null 
+                ? usuarioRepository.findByUsuario(data.usuario()).orElseThrow() 
+                : usuarioRepository.findById(id).orElseThrow();
+        
+        Solicitud model = repository.findByUsuario(usuario).orElseThrow();
+        return SolicitudData.valueOf(model);
+    }
     
     @Transactional
     public SolicitudData create(SolicitudData data) {

@@ -26,7 +26,12 @@ public class UsuarioService {
                 .map((value) -> UsuarioData.valueOf(value))
                 .toList();
     }
-    
+
+    public UsuarioData getById(Long id) {
+        Usuario model = repository.findById(id).orElseThrow();
+        return UsuarioData.valueOf(model);
+    }
+
     public UsuarioData check(UsuarioData data) {
         Optional<Usuario> usuario = repository.findByUsuario(data.usuario());
         if (usuario == null || usuario.isEmpty()) {

@@ -4,6 +4,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.wmdb.recibo.data.SolicitudData;
+import org.wmdb.recibo.data.UsuarioData;
 import org.wmdb.recibo.service.SolicitudService;
 
 @RestController
@@ -16,6 +17,16 @@ public class SolicitudController {
     @GetMapping
     public List<SolicitudData> list() {
         return service.list();
+    }
+    
+    @GetMapping("/{id}")
+    public SolicitudData getById(@PathVariable Long id) {
+        return service.getById(id);
+    }
+    
+    @PostMapping("/usuario/{id}")
+    public SolicitudData getByUser(@RequestBody UsuarioData data) {
+        return service.getByUsuario(data);
     }
     
     @PostMapping

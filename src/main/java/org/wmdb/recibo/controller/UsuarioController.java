@@ -18,6 +18,11 @@ public class UsuarioController {
         return service.list();
     }
     
+    @GetMapping("/{id}")
+    public UsuarioData getById(@PathVariable Long id) {
+        return service.getById(id);
+    }
+    
     @PostMapping
     public UsuarioData create(@RequestBody UsuarioData data) {
         return service.create(data);

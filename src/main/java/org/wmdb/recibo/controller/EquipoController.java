@@ -18,6 +18,11 @@ public class EquipoController {
         return service.list();
     }
     
+    @GetMapping("/{id}")
+    public EquipoData getById(@PathVariable Long id) {
+        return service.getById(id);
+    }
+    
     @PostMapping
     public EquipoData create(@RequestBody EquipoData data) {
         return service.create(data);

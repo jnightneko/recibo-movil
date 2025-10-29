@@ -21,6 +21,11 @@ public class EquipoService {
                 .toList();
     }
     
+    public EquipoData getById(Long id) {
+        Equipo model = repository.findById(id).orElseThrow();
+        return EquipoData.valueOf(model);
+    }
+    
     public EquipoData create(EquipoData data) {
         Equipo model = Equipo.builder()
                 .nombre(data.nombre())
