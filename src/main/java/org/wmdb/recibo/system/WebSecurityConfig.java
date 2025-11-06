@@ -1,5 +1,6 @@
 package org.wmdb.recibo.system;
 
+import java.util.Arrays;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.*;
@@ -13,9 +14,18 @@ public class WebSecurityConfig implements WebMvcConfigurer {
         
     @Override
     public void addCorsMappings(CorsRegistry registry) {
+        String[] hosts = corsHost.getHost().split(" ");
+        for (int i = 0; i < hosts.length; i++) {
+            hosts[i] = hosts[i].trim();
+        }
+        
+        String[] methods = corsHost.getMethods().toArray(String[]::new);
         registry.addMapping("/**")
-                .allowedMethods(corsHost.getMethods().toArray(String[]::new))
+                .allowedMethods(methods)
                 .allowedHeaders("*")
-                .allowedOrigins(corsHost.getHost());
+                .allowedOrigins(hosts);
+        
+        System.out.println("Hosts: " + Arrays.toString(hosts));
+        System.out.println("Methods: " + Arrays.toString(methods));
     }
 }
