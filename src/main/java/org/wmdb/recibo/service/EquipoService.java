@@ -29,6 +29,7 @@ public class EquipoService {
     public EquipoData create(EquipoData data) {
         Equipo model = Equipo.builder()
                 .nombre(data.nombre())
+                .disponible(true)
                 .build();
         return EquipoData.valueOf(
             repository.save(model)
@@ -38,6 +39,7 @@ public class EquipoService {
     public EquipoData update(EquipoData data, Long id) {
         Equipo model = repository.findById(id).orElseThrow();        
         model.setNombre(data.nombre());
+        model.setDisponible(data.disponible());
         
         return EquipoData.valueOf(
             repository.save(model)

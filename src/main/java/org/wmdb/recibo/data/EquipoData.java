@@ -8,6 +8,6 @@ public record EquipoData(
     boolean disponible
 ) {
     public static EquipoData valueOf(Equipo model) {
-        return new EquipoData(model.getIdEquipo(), model.getNombre(), model.getSolicitud() == null);
+        return new EquipoData(model.getIdEquipo(), model.getNombre(), model.isDisponible());
     }
 }
