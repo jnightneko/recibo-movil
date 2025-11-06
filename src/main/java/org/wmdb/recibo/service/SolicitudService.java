@@ -28,7 +28,7 @@ public class SolicitudService {
                 .map((value) -> SolicitudData.valueOf(value))
                 .toList();
     }
-
+    
     public SolicitudData getById(Long id) {
         Solicitud model = repository.findById(id).orElseThrow();
         return SolicitudData.valueOf(model);
@@ -51,7 +51,12 @@ public class SolicitudService {
                         .stream()
                         .map((value) -> value.id())
                         .toList()
-        );
+        ).stream()
+          .map((value) -> {
+            value.setDisponible(false);
+            return value;
+        }).toList();
+        
         Usuario usuario = usuarioRepository.findById(data.usuario().id()).orElseThrow();        
         Solicitud model = Solicitud.builder()
                 .aula(data.aula())
@@ -101,7 +106,7 @@ public class SolicitudService {
         } else {
             System.out.println("NULL <" + model.getEquipos().size() + ">");
             for (final Equipo equipo : model.getEquipos()) {
-                equipo.setSolicitud(null);
+                equipo.setDisponible(true);
                 System.out.println(">> " + equipo.getIdEquipo());
                 equipoRepository.save(equipo);
             }

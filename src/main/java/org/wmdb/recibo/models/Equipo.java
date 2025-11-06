@@ -16,8 +16,10 @@ public class Equipo {
     )
     private Long idEquipo;
     private String nombre;
+    private boolean disponible;
     
     @ManyToOne
     @JoinColumn(name = "idSolicitud", referencedColumnName = "idSolicitud")
     private Solicitud solicitud;
+    
 }

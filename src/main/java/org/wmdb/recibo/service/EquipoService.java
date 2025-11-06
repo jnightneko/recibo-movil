@@ -16,7 +16,7 @@ public class EquipoService {
     public List<EquipoData> list() {
         return repository.findAll()
                 .stream()
-                .filter((value) -> value.getSolicitud() == null)
+                .filter((value) -> value.isDisponible() )
                 .map((value) -> EquipoData.valueOf(value))
                 .toList();
     }
